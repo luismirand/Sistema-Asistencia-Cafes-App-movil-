@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Light_grey">#858383</color>
+    <color name="Guinda">#4c1130</color>
+    <color name="Guinda2">#8b2543</color>
+    <color name="DarkGuinda">#330009</color>
+    <color name="LightGuinda1">#ab7b8d</color>
+    <color name="LightGuinda2">#dab3c2</color>
+    <color name="White2">#f2e8e9</color>
+    <color name="White3">#fbe5ee</color>
+
 </resources>
