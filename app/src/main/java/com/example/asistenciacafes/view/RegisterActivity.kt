@@ -3,6 +3,9 @@ package com.example.asistenciacafes.view
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -20,7 +23,7 @@ import com.example.asistenciacafes.view_model.RegisterActivityViewModel
 import com.example.asistenciacafes.view_model.RegisterActvityViewModelFactory
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener,
-    View.OnKeyListener {
+    View.OnKeyListener, TextWatcher {
     private lateinit var mBinding: ActivityRegisterBinding
     private lateinit var mViewModel: RegisterActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.appellidosEt.onFocusChangeListener = this
         mBinding.correoelectronicoEt.onFocusChangeListener = this
         mBinding.contrasenaEt.onFocusChangeListener = this
+        mBinding.concontrasenaEt.setOnKeyListener(this)
         mBinding.concontrasenaEt.onFocusChangeListener = this
+        mBinding.concontrasenaEt.addTextChangedListener(this)
+        mBinding.registrarBtn.setOnClickListener(this)
         //mViewModel = ViewModelProvider(this, RegisterActvityViewModelFactory(AuthRepository(APIService.getService()), application)).get(RegisterActivityViewModel::class.java)
         //setupObservers()
     }
@@ -162,7 +168,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return errorMessage == null
     }
 
-    private fun validatePassword(): Boolean {
+    private fun validatePassword(shouldUpdateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value = mBinding.contrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -170,7 +176,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         } else if (value.length < 6) {
             errorMessage = "Contraseña debe ser de más de 6 caracteres"
         }
-        if (errorMessage != null) {
+        if (errorMessage != null && shouldUpdateView) {
             mBinding.contrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
@@ -179,7 +185,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return errorMessage == null
     }
 
-    private fun validateConfirmPassword(): Boolean {
+    private fun validateConfirmPassword(shouldUpdateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value = mBinding.concontrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -187,7 +193,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         } else if (value.length < 6) {
             errorMessage = "Contraseña debe ser de más de 6 caracteres"
         }
-        if (errorMessage != null) {
+        if (errorMessage != null && shouldUpdateView) {
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
@@ -196,14 +202,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return errorMessage == null
     }
 
-    private fun validatePasswordAndConfirmPassword(): Boolean {
+    private fun validatePasswordAndConfirmPassword(shouldUpdateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val password = mBinding.contrasenaEt.text.toString()
         val conpassword = mBinding.concontrasenaEt.text.toString()
         if (password != conpassword) {
             errorMessage = "Contraseñas diferentes"
         }
-        if (errorMessage != null) {
+        if (errorMessage != null && shouldUpdateView) {
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
@@ -213,6 +219,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     }
 
     override fun onClick(view: View?) {
+        if (view != null && view.id == R.id.registrarBtn){
+            onSubmit()
+        }
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
@@ -295,11 +304,47 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         }
     }
 
-//    private fun validateName() {
-//        TODO("Not yet implemented")
-//    }
-
-    override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
+    override fun onKey(view: View?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
+        if(KeyEvent.KEYCODE_ENTER == keyCode && keyEvent!!.action == KeyEvent.ACTION_UP){
+            onSubmit()
+        }
         return false
     }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        if(validatePassword(shouldUpdateView = false) && validateConfirmPassword(shouldUpdateView = false) && validatePasswordAndConfirmPassword(shouldUpdateView = false)){
+            mBinding.concontrasenaTil.apply {
+                if(isErrorEnabled) isErrorEnabled = false
+                setStartIconDrawable(R.drawable.baseline_check_circle_24)
+                setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+            }
+        }else{
+            if(mBinding.concontrasenaTil.startIconDrawable != null)
+                mBinding.concontrasenaTil.startIconDrawable = null
+        }
+    }
+
+    override fun afterTextChanged(p0: Editable?) {}
+
+    private fun onSubmit(){
+        if (validate()){
+            //TODO make api request
+        }
+    }
+    private fun validate(): Boolean{
+        var isValid = true
+
+        if (!validateName()) isValid = false
+        if (!validateApellidos()) isValid = false
+        if (!validateEmail()) isValid =  false
+        if (!validatePassword()) isValid = false
+        if (!validateConfirmPassword()) isValid = false
+        if (isValid && validatePasswordAndConfirmPassword()) isValid = false
+
+        return isValid
+    }
 }
+
