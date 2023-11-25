@@ -5,10 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.asistenciacafes.data.RegisterBody
+import com.example.asistenciacafes.data.RegisterResponse
 import com.example.asistenciacafes.data.User
 import com.example.asistenciacafes.data.ValidateEmailBody
 import com.example.asistenciacafes.repository.AuthRepository
+import com.example.asistenciacafes.utils.AuthToken
 import com.example.asistenciacafes.utils.RequestStatus
+import com.example.asistenciacafes.view.RegisterActivity
 import kotlinx.coroutines.launch
 
 class RegisterActivityViewModel(val authRepository: AuthRepository, val application: Application) :
@@ -45,5 +49,26 @@ class RegisterActivityViewModel(val authRepository: AuthRepository, val applicat
             }
         }
     }
+    fun registerUser(body: RegisterBody){
+        viewModelScope.launch {
+            authRepository.registerUser(body).collect{
+                when(it){
+                    is RequestStatus.Waiting -> {
+                        isLoading.value = true
+                    }
+                    is RequestStatus.Success -> {
+                        isLoading.value = false
+                        user.value = it.data.user
+                        //save token using shared preferences
+                        AuthToken.getInstance(application.baseContext).token = it.data.token
 
+                    }
+                    is RequestStatus.Error -> {
+                        isLoading.value = false
+                        errorMessage.value = it.message
+                    }
+                }
+            }
+        }
+    }
 }

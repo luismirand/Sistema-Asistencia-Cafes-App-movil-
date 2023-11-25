@@ -1,5 +1,6 @@
 package com.example.asistenciacafes.view
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.asistenciacafes.R
+import com.example.asistenciacafes.data.RegisterBody
 import com.example.asistenciacafes.data.ValidateEmailBody
 import com.example.asistenciacafes.databinding.ActivityRegisterBinding
 import com.example.asistenciacafes.repository.AuthRepository
@@ -41,82 +43,83 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         //mViewModel = ViewModelProvider(this, RegisterActvityViewModelFactory(AuthRepository(APIService.getService()), application)).get(RegisterActivityViewModel::class.java)
         //setupObservers()
     }
-//    private fun setupObservers(){
+    private fun setupObservers(){
 //        mViewModel.getIsLoading().observe(this){
 //                mBinding.progressBar.isVisible = it
 //        }
-//
-//        mViewModel.getIsUniqueEmail().observe(this){
-//            if(validateEmail(shouldUpdateView = false)){
-//                if(it){
-//                    mBinding.correoelectronicoTil.apply {
-//                        if(isErrorEnabled) isErrorEnabled = false
-//                        setStartIconDrawable(R.drawable.baseline_check_circle_24)
-//                        setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
-//                    }
-//                }else{
-//                    mBinding.correoelectronicoTil.apply {
-//                        if(startIconDrawable != null) startIconDrawable=null
-//                        isErrorEnabled=true
-//                        error = "Correo ya registrado"
-//                    }
-//                }
-//            }
-//        }
-//        mViewModel.getErrorMessage().observe(this){
-//            //nombre, appellido, contraseña
-//            val formErrorKeys = arrayOf("nombre", "appellido", "email", "password")
-//            val message = StringBuilder()
-//            it.map { entry ->
-//                if(formErrorKeys.contains(entry.key)){
-//                    when(entry.key){
-//                        "nombre" -> {
-//                            mBinding.nombresTil.apply {
-//                                isErrorEnabled = true
-//                                error = entry.value
-//                            }
-//                        }
-//                        "apellido"->{
-//                            mBinding.appellidosTil.apply {
-//                                isErrorEnabled = true
-//                                error = entry.value
-//                            }
-//
-//                        }
-//                        "email" ->{
-//                            mBinding.correoelectronicoTil.apply {
-//                                isErrorEnabled = true
-//                                error = entry.value
-//                            }
-//
-//                        }
-//                        "password"->{
-//                            mBinding.contrasenaTil.apply {
-//                                isErrorEnabled = true
-//                                error = entry.value
-//                            }
-//
-//                        }
-//                    }
-//                } else{
-//                    message.append(entry.value).append("\n")
-//                }
-//                if (message.isNotEmpty()){
-//                    AlertDialog.Builder(this)
-//                        .setIcon(R.drawable.info_24)
-//                        .setTitle("Información")
-//                        .setMessage(message)
-//                        .setPositiveButton("OK"){ dialog, _ -> dialog!!.dismiss()}
-//                        .show()
-//                }
-//            }
-//
-//        }
-//        mViewModel.getUser().observe(this){
-//
-//        }
-//
-//    }
+
+        mViewModel.getIsUniqueEmail().observe(this){
+            if(validateEmail(shouldUpdateView = false)){
+                if(it){
+                    mBinding.correoelectronicoTil.apply {
+                        if(isErrorEnabled) isErrorEnabled = false
+                        setStartIconDrawable(R.drawable.baseline_check_circle_24)
+                        setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                    }
+                }else{
+                    mBinding.correoelectronicoTil.apply {
+                        if(startIconDrawable != null) startIconDrawable=null
+                        isErrorEnabled=true
+                        error = "Correo ya registrado"
+                    }
+                }
+            }
+        }
+        mViewModel.getErrorMessage().observe(this){
+            //nombre, appellido, contraseña
+            val formErrorKeys = arrayOf("nombre", "appellido", "email", "password")
+            val message = StringBuilder()
+            it.map { entry ->
+                if(formErrorKeys.contains(entry.key)){
+                    when(entry.key){
+                        "nombre" -> {
+                            mBinding.nombresTil.apply {
+                                isErrorEnabled = true
+                                error = entry.value
+                            }
+                        }
+                        "apellido"->{
+                            mBinding.appellidosTil.apply {
+                                isErrorEnabled = true
+                                error = entry.value
+                            }
+
+                        }
+                        "email" ->{
+                            mBinding.correoelectronicoTil.apply {
+                                isErrorEnabled = true
+                                error = entry.value
+                            }
+
+                        }
+                        "password"->{
+                            mBinding.contrasenaTil.apply {
+                                isErrorEnabled = true
+                                error = entry.value
+                            }
+
+                        }
+                    }
+                } else{
+                    message.append(entry.value).append("\n")
+                }
+                if (message.isNotEmpty()){
+                    AlertDialog.Builder(this)
+                        .setIcon(R.drawable.info_24)
+                        .setTitle("Información")
+                        .setMessage(message)
+                        .setPositiveButton("OK"){ dialog, _ -> dialog!!.dismiss()}
+                        .show()
+                }
+            }
+
+        }
+        mViewModel.getUser().observe(this){
+            if (it != null){
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
+    }
     private fun validateName(): Boolean {
         var errorMessage: String? = null
         val value: String = mBinding.nombresEt.text.toString()
@@ -332,6 +335,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     private fun onSubmit(){
         if (validate()){
             //TODO make api request
+            mViewModel.registerUser(RegisterBody(mBinding.nombresEt.text!!.toString(), mBinding.appellidosEt.text!!.toString(),
+                mBinding.correoelectronicoEt.text!!.toString(), mBinding.contrasenaEt.text!!.toString()))
+
         }
     }
     private fun validate(): Boolean{
