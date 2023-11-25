@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    android:gravity="center"
+    tools:context=".view.RegisterActivity"
+    tools:ignore="ExtraText">
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:elevation="10dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:background="#80000000"-->
+<!--        android:id="@+id/progressBar">-->
+
+<!--        <ProgressBar-->
+<!--            android:layout_width="36dp"-->
+<!--            android:layout_height="36dp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:elevation="100dp"-->
+<!--            android:indeterminate="true"/>-->
+
+
+<!--    </RelativeLayout>-->
 
     <com.google.android.material.card.MaterialCardView
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
         app:cardElevation="8dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="0.5dp"
-        app:cardCornerRadius="0dp">
+        app:strokeColor="@color/Light_grey"
+        app:strokeWidth="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <LinearLayout
-            android:layout_margin="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -33,12 +64,13 @@
                     android:id="@+id/nombresEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="12dp"
                     android:hint="@string/nombre_s"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/appellidosTil"
                 style="@style/MaterialAlertDialog.Material3"
@@ -51,10 +83,10 @@
                     android:id="@+id/appellidosEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="12dp"
                     android:hint="@string/apellidos"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,67 +102,69 @@
                     android:id="@+id/correoelectronicoEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="12dp"
                     android:hint="@string/correo_electr_nico"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contrasenaTil"
                 style="@style/MaterialAlertDialog.Material3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
+                android:layout_marginTop="12dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
-                android:layout_marginTop="12dp">
+                app:passwordToggleEnabled="true">
 
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/contrasenaEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="12dp"
                     android:hint="@string/contrase_a"
-                    android:inputType="text"/>
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/concontrasenaTil"
                 style="@style/MaterialAlertDialog.Material3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
                 app:counterEnabled="true"
-                app:counterMaxLength="15">
+                app:counterMaxLength="15"
+                app:passwordToggleEnabled="true">
 
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/concontrasenaEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="12dp"
                     android:hint="@string/confirme_contrase_a"
-                    android:inputType="text"/>
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="12dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registrarBtn"
+                style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/registarme"
-                android:textSize="18sp"
-                android:layout_marginTop="16dp"
-                style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
