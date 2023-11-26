@@ -21,6 +21,7 @@ import com.example.asistenciacafes.data.ValidateEmailBody
 import com.example.asistenciacafes.databinding.ActivityRegisterBinding
 import com.example.asistenciacafes.repository.AuthRepository
 import com.example.asistenciacafes.utils.APIService
+import com.example.asistenciacafes.utils.VibrateView
 import com.example.asistenciacafes.view_model.RegisterActivityViewModel
 import com.example.asistenciacafes.view_model.RegisterActvityViewModelFactory
 
@@ -120,7 +121,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             }
         }
     }
-    private fun validateName(): Boolean {
+    private fun validateName(shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value: String = mBinding.nombresEt.text.toString()
 
@@ -132,12 +133,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.nombresTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+               if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validateApellidos(): Boolean {
+    private fun validateApellidos(shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value: String = mBinding.appellidosEt.text.toString()
 
@@ -149,12 +151,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.appellidosTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validateEmail(shouldUpdateView: Boolean = true): Boolean {
+    private fun validateEmail(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value = mBinding.correoelectronicoEt.text.toString()
         if (value.isEmpty()) {
@@ -166,12 +169,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.correoelectronicoTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validatePassword(shouldUpdateView: Boolean = true): Boolean {
+    private fun validatePassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value = mBinding.contrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -183,12 +187,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.contrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validateConfirmPassword(shouldUpdateView: Boolean = true): Boolean {
+    private fun validateConfirmPassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value = mBinding.concontrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -200,12 +205,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validatePasswordAndConfirmPassword(shouldUpdateView: Boolean = true): Boolean {
+    private fun validatePasswordAndConfirmPassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val password = mBinding.contrasenaEt.text.toString()
         val conpassword = mBinding.concontrasenaEt.text.toString()
@@ -216,6 +222,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
@@ -343,13 +350,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     private fun validate(): Boolean{
         var isValid = true
 
-        if (!validateName()) isValid = false
-        if (!validateApellidos()) isValid = false
-        if (!validateEmail()) isValid =  false
-        if (!validatePassword()) isValid = false
-        if (!validateConfirmPassword()) isValid = false
-        if (isValid && validatePasswordAndConfirmPassword()) isValid = false
+        if (!validateName(shouldVibrateView = false)) isValid = false
+        if (!validateApellidos(shouldVibrateView = false)) isValid = false
+        if (!validateEmail(shouldVibrateView = false)) isValid =  false
+        if (!validatePassword(shouldVibrateView = false)) isValid = false
+        if (!validateConfirmPassword(shouldVibrateView = false)) isValid = false
+        if (isValid && validatePasswordAndConfirmPassword(shouldVibrateView = false)) isValid = false
 
+        if(!isValid) VibrateView.vibrate(this, mBinding.cardView)
         return isValid
     }
 }
