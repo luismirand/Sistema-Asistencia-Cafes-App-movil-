@@ -6,24 +6,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import com.example.asistenciacafes.R
 import com.example.asistenciacafes.data.RegisterBody
-import com.example.asistenciacafes.data.ValidateEmailBody
 import com.example.asistenciacafes.databinding.ActivityRegisterBinding
-import com.example.asistenciacafes.repository.AuthRepository
-import com.example.asistenciacafes.utils.APIService
 import com.example.asistenciacafes.utils.VibrateView
 import com.example.asistenciacafes.view_model.RegisterActivityViewModel
-import com.example.asistenciacafes.view_model.RegisterActvityViewModelFactory
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener,
     View.OnKeyListener, TextWatcher {
@@ -44,56 +37,60 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         //mViewModel = ViewModelProvider(this, RegisterActvityViewModelFactory(AuthRepository(APIService.getService()), application)).get(RegisterActivityViewModel::class.java)
         //setupObservers()
     }
-    private fun setupObservers(){
+
+    private fun setupObservers() {
 //        mViewModel.getIsLoading().observe(this){
 //                mBinding.progressBar.isVisible = it
 //        }
 
-        mViewModel.getIsUniqueEmail().observe(this){
-            if(validateEmail(shouldUpdateView = false)){
-                if(it){
+        mViewModel.getIsUniqueEmail().observe(this) {
+            if (validateEmail(shouldUpdateView = false)) {
+                if (it) {
                     mBinding.correoelectronicoTil.apply {
-                        if(isErrorEnabled) isErrorEnabled = false
+                        if (isErrorEnabled) isErrorEnabled = false
                         setStartIconDrawable(R.drawable.baseline_check_circle_24)
                         setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
                     }
-                }else{
+                } else {
                     mBinding.correoelectronicoTil.apply {
-                        if(startIconDrawable != null) startIconDrawable=null
-                        isErrorEnabled=true
+                        if (startIconDrawable != null) startIconDrawable = null
+                        isErrorEnabled = true
                         error = "Correo ya registrado"
                     }
                 }
             }
         }
-        mViewModel.getErrorMessage().observe(this){
+        mViewModel.getErrorMessage().observe(this) {
             //nombre, appellido, contraseña
             val formErrorKeys = arrayOf("nombre", "appellido", "email", "password")
             val message = StringBuilder()
             it.map { entry ->
-                if(formErrorKeys.contains(entry.key)){
-                    when(entry.key){
+                if (formErrorKeys.contains(entry.key)) {
+                    when (entry.key) {
                         "nombre" -> {
                             mBinding.nombresTil.apply {
                                 isErrorEnabled = true
                                 error = entry.value
                             }
                         }
-                        "apellido"->{
+
+                        "apellido" -> {
                             mBinding.appellidosTil.apply {
                                 isErrorEnabled = true
                                 error = entry.value
                             }
 
                         }
-                        "email" ->{
+
+                        "email" -> {
                             mBinding.correoelectronicoTil.apply {
                                 isErrorEnabled = true
                                 error = entry.value
                             }
 
                         }
-                        "password"->{
+
+                        "password" -> {
                             mBinding.contrasenaTil.apply {
                                 isErrorEnabled = true
                                 error = entry.value
@@ -101,26 +98,27 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
                         }
                     }
-                } else{
+                } else {
                     message.append(entry.value).append("\n")
                 }
-                if (message.isNotEmpty()){
+                if (message.isNotEmpty()) {
                     AlertDialog.Builder(this)
                         .setIcon(R.drawable.info_24)
                         .setTitle("Información")
                         .setMessage(message)
-                        .setPositiveButton("OK"){ dialog, _ -> dialog!!.dismiss()}
+                        .setPositiveButton("OK") { dialog, _ -> dialog!!.dismiss() }
                         .show()
                 }
             }
 
         }
-        mViewModel.getUser().observe(this){
-            if (it != null){
+        mViewModel.getUser().observe(this) {
+            if (it != null) {
                 startActivity(Intent(this, HomeActivity::class.java))
             }
         }
     }
+
     private fun validateName(shouldVibrateView: Boolean = true): Boolean {
         var errorMessage: String? = null
         val value: String = mBinding.nombresEt.text.toString()
@@ -133,7 +131,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.nombresTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-               if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
@@ -151,13 +149,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.appellidosTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validateEmail(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
+    private fun validateEmail(
+        shouldUpdateView: Boolean = true,
+        shouldVibrateView: Boolean = true
+    ): Boolean {
         var errorMessage: String? = null
         val value = mBinding.correoelectronicoEt.text.toString()
         if (value.isEmpty()) {
@@ -169,13 +170,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.correoelectronicoTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validatePassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
+    private fun validatePassword(
+        shouldUpdateView: Boolean = true,
+        shouldVibrateView: Boolean = true
+    ): Boolean {
         var errorMessage: String? = null
         val value = mBinding.contrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -187,13 +191,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.contrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validateConfirmPassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
+    private fun validateConfirmPassword(
+        shouldUpdateView: Boolean = true,
+        shouldVibrateView: Boolean = true
+    ): Boolean {
         var errorMessage: String? = null
         val value = mBinding.concontrasenaEt.text.toString()
         if (value.isEmpty()) {
@@ -205,13 +212,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
-    private fun validatePasswordAndConfirmPassword(shouldUpdateView: Boolean = true, shouldVibrateView: Boolean = true): Boolean {
+    private fun validatePasswordAndConfirmPassword(
+        shouldUpdateView: Boolean = true,
+        shouldVibrateView: Boolean = true
+    ): Boolean {
         var errorMessage: String? = null
         val password = mBinding.contrasenaEt.text.toString()
         val conpassword = mBinding.concontrasenaEt.text.toString()
@@ -222,14 +232,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.concontrasenaTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                if(shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
             }
         }
         return errorMessage == null
     }
 
     override fun onClick(view: View?) {
-        if (view != null && view.id == R.id.registrarBtn){
+        if (view != null && view.id == R.id.registrarBtn) {
             onSubmit()
         }
     }
@@ -315,7 +325,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     }
 
     override fun onKey(view: View?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
-        if(KeyEvent.KEYCODE_ENTER == keyCode && keyEvent!!.action == KeyEvent.ACTION_UP){
+        if (KeyEvent.KEYCODE_ENTER == keyCode && keyEvent!!.action == KeyEvent.ACTION_UP) {
             onSubmit()
         }
         return false
@@ -325,39 +335,50 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        if(validatePassword(shouldUpdateView = false) && validateConfirmPassword(shouldUpdateView = false) && validatePasswordAndConfirmPassword(shouldUpdateView = false)){
+        if (validatePassword(shouldUpdateView = false) && validateConfirmPassword(shouldUpdateView = false) && validatePasswordAndConfirmPassword(
+                shouldUpdateView = false
+            )
+        ) {
             mBinding.concontrasenaTil.apply {
-                if(isErrorEnabled) isErrorEnabled = false
+                if (isErrorEnabled) isErrorEnabled = false
                 setStartIconDrawable(R.drawable.baseline_check_circle_24)
                 setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
             }
-        }else{
-            if(mBinding.concontrasenaTil.startIconDrawable != null)
+        } else {
+            if (mBinding.concontrasenaTil.startIconDrawable != null)
                 mBinding.concontrasenaTil.startIconDrawable = null
         }
     }
 
     override fun afterTextChanged(p0: Editable?) {}
 
-    private fun onSubmit(){
-        if (validate()){
+    private fun onSubmit() {
+        if (validate()) {
             //TODO make api request
-            mViewModel.registerUser(RegisterBody(mBinding.nombresEt.text!!.toString(), mBinding.appellidosEt.text!!.toString(),
-                mBinding.correoelectronicoEt.text!!.toString(), mBinding.contrasenaEt.text!!.toString()))
+            mViewModel.registerUser(
+                RegisterBody(
+                    mBinding.nombresEt.text!!.toString(),
+                    mBinding.appellidosEt.text!!.toString(),
+                    mBinding.correoelectronicoEt.text!!.toString(),
+                    mBinding.contrasenaEt.text!!.toString()
+                )
+            )
 
         }
     }
-    private fun validate(): Boolean{
+
+    private fun validate(): Boolean {
         var isValid = true
 
         if (!validateName(shouldVibrateView = false)) isValid = false
         if (!validateApellidos(shouldVibrateView = false)) isValid = false
-        if (!validateEmail(shouldVibrateView = false)) isValid =  false
+        if (!validateEmail(shouldVibrateView = false)) isValid = false
         if (!validatePassword(shouldVibrateView = false)) isValid = false
         if (!validateConfirmPassword(shouldVibrateView = false)) isValid = false
-        if (isValid && validatePasswordAndConfirmPassword(shouldVibrateView = false)) isValid = false
+        if (isValid && validatePasswordAndConfirmPassword(shouldVibrateView = false)) isValid =
+            false
 
-        if(!isValid) VibrateView.vibrate(this, mBinding.cardView)
+        if (!isValid) VibrateView.vibrate(this, mBinding.cardView)
         return isValid
     }
 }

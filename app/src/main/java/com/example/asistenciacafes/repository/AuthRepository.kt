@@ -24,7 +24,8 @@ class AuthRepository(private val consumer: APIConsumer) {
             )
         }
     }
-    fun registerUser(body: RegisterBody) = flow{
+
+    fun registerUser(body: RegisterBody) = flow {
         emit(RequestStatus.Waiting)
         val response = consumer.registerUser(body)
         if (response.isSuccessful) {

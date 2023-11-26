@@ -1,7 +1,7 @@
 package com.example.asistenciacafes.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.asistenciacafes.R
 
 class LoginActivity : AppCompatActivity() {
