@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".view.RegisterActivity"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:background="@color/bg">
 
     <!--    <RelativeLayout-->
     <!--        android:layout_width="match_parent"-->
