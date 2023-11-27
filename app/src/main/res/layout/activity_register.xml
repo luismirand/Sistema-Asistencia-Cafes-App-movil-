@@ -31,6 +31,32 @@
 
     <!--    </RelativeLayout>-->
 
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="174dp"
+        android:layout_height="116dp"
+        android:src="@mipmap/logocafes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints"/>
+
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/backspace_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -54,11 +80,26 @@
             android:layout_margin="12dp"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="20dp"
+                android:text="Registro"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nombresTil"
                 style="@style/MaterialAlertDialog.Material3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
 
 
                 <com.google.android.material.textfield.TextInputEditText

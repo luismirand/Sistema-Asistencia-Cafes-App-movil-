@@ -22,6 +22,7 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
         app:strokeColor="@color/Light_grey"
         app:strokeWidth="1dp">
 
@@ -31,6 +32,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tituloPrincipalTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="1dp"
+                android:text="Sistema de Asistencia CAFES"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -96,18 +108,32 @@
                     android:text="@string/neewUser" />
 
                 <TextView
+                    android:id="@+id/registerBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="14dp"
                     android:layout_marginStart="4dp"
-                    android:text="@string/registarme"
+                    android:clickable="true"
                     android:focusable="true"
-                    android:clickable="true"/>
+                    android:text="@string/registarme" />
 
 
             </LinearLayout>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="226dp"
+        android:layout_height="176dp"
+        android:src="@mipmap/logocafes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints">
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

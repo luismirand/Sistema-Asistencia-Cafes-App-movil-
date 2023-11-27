@@ -34,6 +34,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.concontrasenaEt.onFocusChangeListener = this
         mBinding.concontrasenaEt.addTextChangedListener(this)
         mBinding.registrarBtn.setOnClickListener(this)
+        mBinding.backBtn.setOnClickListener(this)
         //mViewModel = ViewModelProvider(this, RegisterActvityViewModelFactory(AuthRepository(APIService.getService()), application)).get(RegisterActivityViewModel::class.java)
         //setupObservers()
     }
@@ -239,9 +240,21 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     }
 
     override fun onClick(view: View?) {
-        if (view != null && view.id == R.id.registrarBtn) {
-            onSubmit()
+//        if (view != null && view.id == R.id.registrarBtn) {
+//            onSubmit()
+//        }
+        if (view != null) {
+            when(view.id){
+                R.id.registrarBtn ->{
+                    //submitForm()
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.backBtn->{
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+            }
         }
+
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {

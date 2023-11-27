@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.asistenciacafes.R
 import com.example.asistenciacafes.databinding.ActivityLoginBinding
 import com.example.asistenciacafes.utils.VibrateView
-import com.example.asistenciacafes.view_model.LoginActivityViewModel
+
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener, View.OnKeyListener {
     private lateinit var mBinding: ActivityLoginBinding
-    private lateinit var mViewModel: LoginActivityViewModel
+    //private lateinit var mViewModel: LoginActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,55 +33,55 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         setContentView(mBinding.root)
     }
 
-    private fun setupObservers() {
-//        mViewModel.getIsLoading().observe(this){
-//                mBinding.progressBar.isVisible = it
+//    private fun setupObservers() {
+////        mViewModel.getIsLoading().observe(this){
+////                mBinding.progressBar.isVisible = it
+////        }
+//
+//        mViewModel.getErrorMessage().observe(this) {
+//            //nombre, appellido, contraseña
+//            val formErrorKeys = arrayOf("nombre", "appellido", "email", "password")
+//            val message = StringBuilder()
+//            it.map { entry ->
+//                if (formErrorKeys.contains(entry.key)) {
+//                    when (entry.key) {
+//
+//                        "email" -> {
+//                            mBinding.correoelectronicoTil.apply {
+//                                isErrorEnabled = true
+//                                error = entry.value
+//                            }
+//
+//                        }
+//
+//                        "password" -> {
+//                            mBinding.contrasenaTil.apply {
+//                                isErrorEnabled = true
+//                                error = entry.value
+//                            }
+//
+//                        }
+//                    }
+//                } else {
+//                    message.append(entry.value).append("\n")
+//                }
+//                if (message.isNotEmpty()) {
+//                    AlertDialog.Builder(this)
+//                        .setIcon(R.drawable.info_24)
+//                        .setTitle("Información")
+//                        .setMessage(message)
+//                        .setPositiveButton("OK") { dialog, _ -> dialog!!.dismiss() }
+//                        .show()
+//                }
+//            }
+//
 //        }
-
-        mViewModel.getErrorMessage().observe(this) {
-            //nombre, appellido, contraseña
-            val formErrorKeys = arrayOf("nombre", "appellido", "email", "password")
-            val message = StringBuilder()
-            it.map { entry ->
-                if (formErrorKeys.contains(entry.key)) {
-                    when (entry.key) {
-
-                        "email" -> {
-                            mBinding.correoelectronicoTil.apply {
-                                isErrorEnabled = true
-                                error = entry.value
-                            }
-
-                        }
-
-                        "password" -> {
-                            mBinding.contrasenaTil.apply {
-                                isErrorEnabled = true
-                                error = entry.value
-                            }
-
-                        }
-                    }
-                } else {
-                    message.append(entry.value).append("\n")
-                }
-                if (message.isNotEmpty()) {
-                    AlertDialog.Builder(this)
-                        .setIcon(R.drawable.info_24)
-                        .setTitle("Información")
-                        .setMessage(message)
-                        .setPositiveButton("OK") { dialog, _ -> dialog!!.dismiss() }
-                        .show()
-                }
-            }
-
-        }
-        mViewModel.getUser().observe(this) {
-            if (it != null) {
-                startActivity(Intent(this, HomeActivity::class.java))
-            }
-        }
-    }
+//        mViewModel.getUser().observe(this) {
+//            if (it != null) {
+//                startActivity(Intent(this, HomeActivity::class.java))
+//            }
+//        }
+//    }
 
 
     private fun validateEmail(
@@ -140,7 +140,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         if (view != null) {
             when(view.id){
                 R.id.iniciarSesionBtn ->{
-                    submitForm()
+                    //submitForm()
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.registerBtn->{
+                    startActivity(Intent(this, RegisterActivity::class.java))
                 }
             }
         }
