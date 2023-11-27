@@ -360,7 +360,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                     mBinding.nombresEt.text!!.toString(),
                     mBinding.appellidosEt.text!!.toString(),
                     mBinding.correoelectronicoEt.text!!.toString(),
-                    mBinding.contrasenaEt.text!!.toString(),
+                    mBinding.contrasenaEt.text!!.toString()
                 )
             )
 

@@ -5,14 +5,4 @@
     android:layout_height="match_parent"
     tools:context=".view.HomeActivity">
 
-    <TextView
-        android:layout_width="104dp"
-        android:layout_height="49dp"
-        android:gravity="center"
-        android:text="hola"
-
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="295dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
