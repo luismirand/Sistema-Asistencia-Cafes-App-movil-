@@ -35,7 +35,7 @@
         android:id="@+id/logoImageView"
         android:layout_width="174dp"
         android:layout_height="116dp"
-        android:src="@mipmap/logocafes"
+        android:src="@mipmap/logocafeshd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
