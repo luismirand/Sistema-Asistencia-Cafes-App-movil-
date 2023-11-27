@@ -29,6 +29,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.nombresEt.onFocusChangeListener = this
         mBinding.appellidosEt.onFocusChangeListener = this
         mBinding.correoelectronicoEt.onFocusChangeListener = this
+        mBinding.telefonoEt.onFocusChangeListener = this
         mBinding.contrasenaEt.onFocusChangeListener = this
         mBinding.concontrasenaEt.setOnKeyListener(this)
         mBinding.concontrasenaEt.onFocusChangeListener = this
@@ -177,6 +178,23 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return errorMessage == null
     }
 
+    private fun validatePhone(shouldVibrateView: Boolean = true): Boolean {
+        var errorMessage: String? = null
+        val value: String = mBinding.telefonoEt.text.toString()
+
+        if (value.isEmpty()) {
+            errorMessage = "Nombre (s) necesarios"
+        }
+
+        if (errorMessage != null) {
+            mBinding.telefonoTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+                if (shouldVibrateView) VibrateView.vibrate(this@RegisterActivity, this)
+            }
+        }
+        return errorMessage == null
+    }
     private fun validatePassword(
         shouldUpdateView: Boolean = true,
         shouldVibrateView: Boolean = true
@@ -277,6 +295,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                         }
                     } else {
                         validateApellidos()
+                    }
+                }
+
+                R.id.telefonoEt -> {
+                    if (hasFocus) {
+                        if (mBinding.telefonoTil.isErrorEnabled) {
+                            mBinding.telefonoTil.isErrorEnabled = false
+                        }
+                    } else {
+                        validatePhone()
                     }
                 }
 
@@ -386,6 +414,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         if (!validateName(shouldVibrateView = false)) isValid = false
         if (!validateApellidos(shouldVibrateView = false)) isValid = false
         if (!validateEmail(shouldVibrateView = false)) isValid = false
+        if (!validatePhone(shouldVibrateView = false)) isValid = false
         if (!validatePassword(shouldVibrateView = false)) isValid = false
         if (!validateConfirmPassword(shouldVibrateView = false)) isValid = false
         if (isValid && validatePasswordAndConfirmPassword(shouldVibrateView = false)) isValid =

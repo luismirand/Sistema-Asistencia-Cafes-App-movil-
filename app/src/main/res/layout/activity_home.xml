@@ -52,6 +52,7 @@
             app:layout_constraintHorizontal_bias="0.368"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/horarioBtn"
             style="@style/ShapeAppearance.Material3.SmallComponent"
@@ -59,6 +60,8 @@
             android:layout_height="70dp"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:elevation="8dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="MI HORARIO"
@@ -73,6 +76,7 @@
             android:layout_marginTop="25dp"
             android:layout_gravity="center"
             android:layout_marginBottom="50dp"
+            android:elevation="8dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="MIS REGISTROS"
@@ -86,9 +90,9 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-
+            android:elevation="8dp"
             app:icon="@mipmap/codigo_qr"
-            app:iconSize="98dp"
+            app:iconSize="100dp"
             />
 
         <TextView
