@@ -1,8 +1,10 @@
 package com.example.asistenciacafes.data
 
 data class RegisterBody(
-    val nombre: String,
+    //val tipo: String,
+    val nombres: String,
     val apellidos: String,
     val email: String,
-    val password: String
+    //val telefono: String,
+    val contrasena: String
 )

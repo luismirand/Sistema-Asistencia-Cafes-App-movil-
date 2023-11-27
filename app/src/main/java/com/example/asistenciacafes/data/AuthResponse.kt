@@ -1,3 +1,4 @@
 package com.example.asistenciacafes.data
 
-data class AuthResponse(val user: User, val token: String)
+data class AuthResponse(val access_token: String, val token_type: String)
+//antes access_token era User (modificado ya veremos)

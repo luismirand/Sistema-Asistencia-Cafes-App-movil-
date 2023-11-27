@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         mBinding.contrasenaEt.onFocusChangeListener = this
         mBinding.contrasenaEt.setOnClickListener(this)
         //mViewModel = ViewModelProvider(this, LoginActivityViewModelFactory(AuthRepository(APIService.getService()), application)).get(LoginActivityViewModel::class.java)
-        //setupObservers()
+        setupObservers()
 
         setContentView(mBinding.root)
     }
@@ -140,7 +140,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         if (view != null) {
             when(view.id){
                 R.id.iniciarSesionBtn ->{
-                    submitForm()
+                    //submitForm()
+                    startActivity(Intent(this, HomeActivity::class.java))  //entrar a la HomeActivity directamente
+                }
+                R.id.registerBtn ->{
+                    startActivity(Intent(this, RegisterActivity::class.java))
                 }
             }
         }
