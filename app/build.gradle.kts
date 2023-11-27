@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.asistenciacafes"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -55,4 +55,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    //zxing
+    implementation("com.google.zxing:core:3.5.0")
+    implementation("com.journeyapps:zxing-android-embedded:4.2.0")
+
 }
