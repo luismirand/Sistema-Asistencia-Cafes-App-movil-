@@ -7,7 +7,7 @@
     android:gravity="center"
     tools:context=".view.RegisterActivity"
     tools:ignore="ExtraText"
-    android:background="@color/bg">
+    android:background="#DCC9E1">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.55"
-        app:strokeColor="@color/Light_grey"
+        app:strokeColor="@color/front"
         app:strokeWidth="1dp">
 
 

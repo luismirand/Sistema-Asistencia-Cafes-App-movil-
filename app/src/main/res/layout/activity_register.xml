@@ -71,7 +71,7 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/Light_grey"
+        app:strokeColor="@color/front"
         app:strokeWidth="1dp">
 
 

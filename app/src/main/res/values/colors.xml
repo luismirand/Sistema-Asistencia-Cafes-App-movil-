@@ -10,6 +10,7 @@
     <color name="LightGuinda2">#dab3c2</color>
     <color name="White2">#f2e8e9</color>
     <color name="White3">#fbe5ee</color>
-    <color name="bg">#FAE6F0</color>
+    <color name="front">#FAE6F0</color>
+    <color name="bg">#DCC9E1</color>
 
 </resources>
