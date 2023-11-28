@@ -60,4 +60,6 @@ dependencies {
     implementation("com.google.zxing:core:3.5.0")
     implementation("com.journeyapps:zxing-android-embedded:4.2.0")
 
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
+
 }

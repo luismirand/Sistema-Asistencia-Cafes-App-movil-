@@ -22,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/innerCardView"
             android:layout_width="match_parent"
@@ -36,8 +37,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/Light_grey"
-            app:strokeWidth="1dp"
-            android:backgroundTint="#BFBFBF">
+            app:strokeWidth="2dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,6 +89,17 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView"
+            android:layout_gravity="center"
+            android:layout_marginTop="96dp"
+
+            />
+
 
     </com.google.android.material.card.MaterialCardView>
 
