@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCC9E1"
     android:gravity="center"
     tools:context=".view.RegisterActivity"
-    tools:ignore="ExtraText"
-    android:background="#DCC9E1">
+    tools:ignore="ExtraText">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -42,9 +42,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="1dp"
                 android:text="Sistema de Asistencia CAFES"
+                android:textAlignment="center"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -114,12 +114,12 @@
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:layout_marginVertical="14dp"
+                    android:layout_marginLeft="3dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:layout_marginLeft="3dp"
                     android:text="Registrarme"
-                    android:textStyle="bold"
-                    android:textColor="@color/LightGuinda1" />
+                    android:textColor="@color/LightGuinda1"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -132,12 +132,11 @@
         android:layout_width="226dp"
         android:layout_height="176dp"
         android:src="@mipmap/logocafeshd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints">
-    </ImageView>
+        tools:ignore="MissingConstraints"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

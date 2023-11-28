@@ -6,16 +6,16 @@ import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.asistenciacafes.R
 import com.example.asistenciacafes.databinding.ActivityLoginBinding
 import com.example.asistenciacafes.utils.VibrateView
 
 
-
-class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener, View.OnKeyListener {
+class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener,
+    View.OnKeyListener {
     private lateinit var mBinding: ActivityLoginBinding
+
     //private lateinit var mViewModel: LoginActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,6 +126,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         }
         return errorMessage == null
     }
+
     private fun validate(): Boolean {
         var isValid = true
 
@@ -138,18 +139,18 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
 
     override fun onClick(view: View?) {
         if (view != null) {
-            when(view.id){
-                R.id.iniciarSesionBtn ->{
+            when (view.id) {
+                R.id.iniciarSesionBtn -> {
                     //submitForm()
                     startActivity(Intent(this, HomeActivity::class.java))
                 }
-                R.id.registerBtn->{
+
+                R.id.registerBtn -> {
                     startActivity(Intent(this, RegisterActivity::class.java))
                 }
             }
         }
     }
-
 
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
@@ -179,14 +180,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCha
         }
     }
 
-    private fun submitForm(){
-        if(validate()){
+    private fun submitForm() {
+        if (validate()) {
             //verify user credentials
             //mViewModel.loginUser(LoginBody(mBinding.correoelectronicoEt.text!!.toString(),mBinding.contrasenaEt.text!!.toString()))
         }
     }
+
     override fun onKey(view: View?, keyCode: Int, keyEvent: KeyEvent?): Boolean {
-        if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent!!.action == KeyEvent.ACTION_UP){
+        if (keyCode == KeyEvent.KEYCODE_ENTER && keyEvent!!.action == KeyEvent.ACTION_UP) {
             submitForm()
         }
         return false

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     android:gravity="center"
     tools:context=".view.RegisterActivity"
-    tools:ignore="ExtraText"
-    android:background="@color/bg">
+    tools:ignore="ExtraText">
 
     <!--    <RelativeLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -37,12 +37,12 @@
         android:layout_width="174dp"
         android:layout_height="116dp"
         android:src="@mipmap/logocafeshd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
 
     <ImageButton
@@ -55,7 +55,6 @@
         android:src="@drawable/backspace_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <com.google.android.material.card.MaterialCardView

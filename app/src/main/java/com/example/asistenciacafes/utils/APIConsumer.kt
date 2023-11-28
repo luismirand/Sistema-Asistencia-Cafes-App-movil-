@@ -1,8 +1,8 @@
 package com.example.asistenciacafes.utils
 
-import com.example.asistenciacafes.data.RegisterBody
 import com.example.asistenciacafes.data.AuthResponse
 import com.example.asistenciacafes.data.LoginBody
+import com.example.asistenciacafes.data.RegisterBody
 import com.example.asistenciacafes.data.UniqueEmailValidationResponse
 import com.example.asistenciacafes.data.ValidateEmailBody
 import retrofit2.Response

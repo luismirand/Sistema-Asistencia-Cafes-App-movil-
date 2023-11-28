@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.asistenciacafes.data.RegisterBody
 import com.example.asistenciacafes.data.User
-import com.example.asistenciacafes.data.ValidateEmailBody
 import com.example.asistenciacafes.repository.AuthRepository
 import com.example.asistenciacafes.utils.AuthToken
 import com.example.asistenciacafes.utils.RequestStatus

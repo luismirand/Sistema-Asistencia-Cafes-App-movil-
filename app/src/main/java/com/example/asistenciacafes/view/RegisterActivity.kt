@@ -195,6 +195,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         }
         return errorMessage == null
     }
+
     private fun validatePassword(
         shouldUpdateView: Boolean = true,
         shouldVibrateView: Boolean = true
@@ -262,12 +263,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 //            onSubmit()
 //        }
         if (view != null) {
-            when(view.id){
-                R.id.registrarBtn ->{
+            when (view.id) {
+                R.id.registrarBtn -> {
                     //submitForm()
                     startActivity(Intent(this, HomeActivity::class.java))
                 }
-                R.id.backBtn->{
+
+                R.id.backBtn -> {
                     startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
