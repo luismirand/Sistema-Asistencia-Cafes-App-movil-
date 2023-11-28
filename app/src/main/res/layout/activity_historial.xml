@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/innerCardView"
             android:layout_width="match_parent"
@@ -96,8 +95,8 @@
             android:layout_height="match_parent"
             android:id="@+id/listView"
             android:layout_gravity="center"
-            android:layout_marginTop="96dp"
-
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="32dp"
             />
 
 
